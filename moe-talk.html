@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Kyle Zoleta - Moe Talk</title>
+	<link rel="stylesheet" href="styles.css">
+	<script src="moe-talk.js" defer></script>
+</head>
+<body>
+	<div class="site-shell">
+		<header class="site-header">
+			<div class="header-inner container">
+				<div class="logo"><img src="pfp.jpg" alt="Kyle Zoleta"></div>
+				<div class="header-info">
+					<h1>Kyle Zoleta</h1>
+					<p>IT Student | Developer | Creative</p>
+				</div>
+				<div class="header-actions">
+					<nav class="top-nav" aria-label="Main navigation">
+						<a href="index.html">About</a>
+						<a href="skills.html">Skills</a>
+						<a href="hobbies.html">Hobbies</a>
+						<a href="inspirations.html">Inspirations</a>
+						<a href="featured-projects.html">Projects</a>
+						<a class="active" href="moe-talk.html">Moe Talk</a>
+						<a href="contact.html">Contact</a>
+					</nav>
+					<a class="link-btn" href="https://moesoft.infinityfreeapp.com/" target="_blank" rel="noopener noreferrer">Moesoft</a>
+				</div>
+			</div>
+		</header>
+
+		<main class="page-main container">
+			<section class="card talk-card reveal">
+				<div class="section-title-row">
+					<h2>Moe Talk / Guest Wall</h2>
+					<span class="pixel-tag blink">browser local mode</span>
+				</div>
+				<div class="status-strip"><span>Post is local only: saved in this browser cache + nickname cookie // no server, no database //</span></div>
+
+				<div class="talk-layout">
+					<form id="moe-talk-form" class="talk-form reveal delay-1" autocomplete="on">
+						<label for="nickname">Nickname</label>
+						<input id="nickname" name="nickname" maxlength="24" required placeholder="Enter your nickname">
+
+						<label for="message">Message</label>
+						<textarea id="message" name="message" rows="4" maxlength="320" required placeholder="Share your thoughts, route reaction, or random cafe moment"></textarea>
+
+						<div class="talk-actions">
+							<button type="submit" class="talk-btn">Post to Wall</button>
+							<button type="button" id="clear-local" class="talk-btn alt">Clear Local Posts</button>
+						</div>
+						<p id="talk-feedback" class="talk-feedback" aria-live="polite"></p>
+					</form>
+
+					<div class="talk-feed reveal delay-2">
+						<div class="section-title-row">
+							<h3>Recent Posts</h3>
+							<span class="pixel-tag">cached</span>
+						</div>
+						<ul id="talk-posts" class="talk-posts" aria-live="polite"></ul>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			<div class="container">&copy; 2026 Kyle Zoleta</div>
+		</footer>
+	</div>
+</body>
+</html>
