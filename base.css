@@ -1,4 +1,35 @@
 :root {
+  --design-width: 1366px;
+  --design-height: 768px;
+  --viewport-scale: min(
+    calc(100vw / var(--design-width)),
+    calc(100dvh / var(--design-height))
+  );
+  --base-font-size: 16px;
+  --text-xs: 0.78rem;
+  --text-sm: 0.9rem;
+  --text-md: 1rem;
+  --text-lg: 1.22rem;
+  --text-xl: 1.36rem;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 20px;
+  --space-xl: 28px;
+  /* Pastel JRPG Color Palette */
+  --jrpg-bg-deep: #f5f0f9;
+  --jrpg-bg-field: #fafaf8;
+  --jrpg-window: #ffd7e3;
+  --jrpg-window-dark: #f0c9d8;
+  --jrpg-text: #3f3f3f;
+  --jrpg-text-light: #ffffff;
+  --jrpg-accent-gold: #ffc5d8;
+  --jrpg-accent-red: #ff9db5;
+  --jrpg-accent-cyan: #d7eeff;
+  --jrpg-accent-purple: #e8d7ff;
+  --jrpg-border-dark: #b8a8c8;
+  --jrpg-border-light: #fff9ee;
+  /* Legacy names for compatibility */
   --pink: #ffd7e3;
   --pink-dark: #ff88b5;
   --pink-ink: #f0649b;
@@ -7,10 +38,36 @@
   --mint: #d6f8e6;
   --cream: #fff9ee;
   --white: #ffffff;
-  --gray-text: #2f3b45;
-  --gray-muted: #627285;
-  --accent-line: rgba(247, 125, 187, 0.34);
-  --retro-shadow: rgba(89, 95, 128, 0.2);
+  --gray-text: #3f3f3f;
+  --gray-muted: #7a7a8e;
+  --accent-line: rgba(255, 152, 181, 0.3);
+  --retro-shadow: rgba(100, 80, 110, 0.3);
+  --shadow-subtle: 2px 2px 0 rgba(100, 80, 110, 0.25);
+  --shadow-medium: 3px 3px 0 rgba(100, 80, 110, 0.35);
+  --shadow-strong: 4px 4px 0 rgba(100, 80, 110, 0.45);
+  --shadow-inset: inset 1px 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Mobile Resolution Lock (390x844) */
+@media (max-aspect-ratio: 1/1.3) {
+  :root {
+    --design-width: 390px;
+    --design-height: 844px;
+    --viewport-scale: min(
+      calc(100vw / var(--design-width)),
+      calc(100dvh / var(--design-height))
+    );
+    --text-xs: 0.72rem;
+    --text-sm: 0.82rem;
+    --text-md: 0.92rem;
+    --text-lg: 1.08rem;
+    --text-xl: 1.2rem;
+    --space-xs: 6px;
+    --space-sm: 10px;
+    --space-md: 14px;
+    --space-lg: 18px;
+    --space-xl: 24px;
+  }
 }
 
 * {
@@ -25,17 +82,36 @@ body {
   overflow: hidden;
 }
 
+html {
+  font-size: var(--base-font-size);
+}
+
 body {
-  font-family: "Verdana", "Tahoma", "MS UI Gothic", sans-serif;
+  font-family: "MS UI Gothic", "Verdana", "Tahoma", monospace, sans-serif;
   color: var(--gray-text);
   background:
-    radial-gradient(circle at 12% 14%, rgba(255, 255, 255, 0.6), transparent 28%),
-    radial-gradient(circle at 88% 86%, rgba(255, 255, 255, 0.44), transparent 30%),
-    linear-gradient(135deg, #ffd9ea, #d7eeff 44%, #d6f8e6);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  letter-spacing: 0.15px;
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 19px,
+      rgba(255, 215, 227, 0.5) 19px,
+      rgba(255, 215, 227, 0.5) 20px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 19px,
+      rgba(255, 215, 227, 0.5) 19px,
+      rgba(255, 215, 227, 0.5) 20px
+    ),
+    linear-gradient(180deg, #f5f0f9 0%, #fafaf8 100%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: pixelated;
+  -moz-osx-font-smoothing: auto;
+  letter-spacing: 0.2px;
   position: relative;
+  line-height: 1.4;
+  image-rendering: pixelated;
 }
 
 body::before,
@@ -47,19 +123,19 @@ body::after {
 }
 
 body::before {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 1px);
-  background-size: 12px 12px;
-  opacity: 0.25;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(200, 150, 180, 0) 0,
+    rgba(200, 150, 180, 0) 2px,
+    rgba(200, 150, 180, 0.08) 2px,
+    rgba(200, 150, 180, 0.08) 4px
+  );
+  opacity: 0.3;
 }
 
 body::after {
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0) 0,
-    rgba(255, 255, 255, 0) 3px,
-    rgba(255, 255, 255, 0.16) 4px
-  );
-  opacity: 0.28;
+  background: none;
+  opacity: 0;
 }
 
 a {
@@ -74,13 +150,36 @@ ul {
   margin-top: 0;
 }
 
+h1 {
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: var(--text-xl);
+}
+
+h2 {
+  line-height: 1.25;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+h3 {
+  line-height: 1.25;
+  font-weight: bold;
+}
+
+p {
+  line-height: 1.45;
+}
+
 .container {
   width: min(1024px, 96vw);
   margin: 0 auto;
 }
 
 .reveal {
-  animation: revealUp 0.55s ease both;
+  animation: revealUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 .delay-1 {
